@@ -12,5 +12,7 @@
   }
   ul > li {
     text-transform: capitalize;
+    list-style: none;
+    padding: 0.5rem;
   }
 }

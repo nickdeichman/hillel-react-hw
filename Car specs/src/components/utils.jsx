@@ -18,7 +18,7 @@ export const renderObject = (obj, index) => {
     <ul key={index}>
       {Object.entries(obj).map((entry, index) => {
         return entry[0] !== 'id' ? (
-          <li style={{ listStyle: 'none', padding: '.5rem' }} key={index}>
+          <li key={index}>
             {entry[0]}: {entry[1]}
           </li>
         ) : null;
