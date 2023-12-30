@@ -1,0 +1,16 @@
+.car__model {
+  background: red;
+  width: 30%;
+}
+
+.model__characteristics {
+  background: wheat;
+  color: black;
+
+  ul:not(:last-child) {
+    border-bottom: 2px solid black;
+  }
+  ul > li {
+    text-transform: capitalize;
+  }
+}

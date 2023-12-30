@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import {renderArray} from '../utils'
+import './modelRow.scss';
 
 const ModelRow = ({ models }) => {
   ModelRow.propTypes = {
@@ -9,27 +11,13 @@ const ModelRow = ({ models }) => {
       {models.length
         ? models.map((model) => (
             <tr key={model.id}>
-              <th colSpan={1}>{model.name}</th>
-              <tr style={{ display: 'flex', flexDirection: 'column' }}>
-                <td>Version: Citycarver</td>
-                <td>Year: 2019</td>
-                <td>Horsepower: 95</td>
-                <td>Engine: 999</td>
-              </tr>
+              <th className='car__model' colSpan={1}>{model.name}</th>
+              {renderArray(model.collection)}
             </tr>
           ))
         : null}
     </>
   );
-  // {
-  //   models.length
-  //     ? models.map((model) => {
-  //         return (
-
-  //         );
-  //       })
-  //     : null;
-  // }
 };
 
 export default ModelRow;

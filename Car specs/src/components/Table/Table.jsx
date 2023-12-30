@@ -1,3 +1,4 @@
+import './table.scss';
 import TBody from '../TBody/TBody';
 import THead from '../THead/THead';
 import { CARS } from '../constants';
