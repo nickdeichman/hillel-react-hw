@@ -1,0 +1,42 @@
+@mixin button {
+  padding: 0.5rem;
+  background: none;
+  outline: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  color: #fff;
+
+}
+
+button {
+  @include button();
+}
+
+button:active {
+  transform: translateY(2px);
+}
+
+.green {
+  background-color: #1eab2e; //15b127
+}
+.green:hover {
+  background-color: #15b127; //1eab2e
+}
+
+.red {
+  background-color: #a82424;
+}
+.red:hover {
+  background-color: #bc2121;
+}
+
+.yellow {
+  background-color: #a2ba27;
+}
+
+.yellow:hover {
+  background-color: #acc725;
+}
