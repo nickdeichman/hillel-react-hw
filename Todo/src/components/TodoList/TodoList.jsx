@@ -70,7 +70,7 @@ const TodoList = () => {
   const handleAddTodo = () => {
     let newTodo = {
       userId: 1,
-      id: todos[todos.length - 1].id + 1,
+      id: todos.length ? todos[todos.length - 1].id + 1 : 1,
       title: newTodoTitle,
       completed: false,
     };
