@@ -1,6 +1,6 @@
 import './todoItem.scss';
 import Button from '../Button/Button';
-import { TodoContext } from '../TodoList/TodoList';
+import { TodoContext } from '../../context/todoContext';
 import { useContext, useState } from 'react';
 import TextInput from '../TextInput/TextInput';
 
@@ -23,12 +23,12 @@ const TodoItem = ({ item }) => {
       <TextInput onChange={handleChange} placeholder={todoTitle} />
       <Button
         className={'green'}
-        onClickFunc={() => handleSaveButton(item, todoTitle)}
+        onClick={() => handleSaveButton(item, todoTitle)}
         value={'Save'}
       />
       <Button
         className={'red'}
-        onClickFunc={() => {
+        onClick={() => {
           handleCancelButton(item);
           setTodoTitle(item.title);
         }}
@@ -39,18 +39,18 @@ const TodoItem = ({ item }) => {
     <div className='list__item'>
       <li
         onClick={() => handleCompleteClick(item)}
-        className={item.completed ? 'completed' : null}
+        className={item.completed || item.status ? 'completed' : null}
       >
         {item.title}
       </li>
       <Button
         className={'yellow'}
-        onClickFunc={() => handleEditButton(item)}
+        onClick={() => handleEditButton(item)}
         value={'Edit'}
       />
       <Button
         className={'red'}
-        onClickFunc={() => handleDeleteButton(item)}
+        onClick={() => handleDeleteButton(item.id)}
         value={'Delete'}
       />
     </div>

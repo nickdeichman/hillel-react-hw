@@ -1,7 +1,6 @@
-import TodoList from './TodoList/TodoList';
-
+import Todos from './Todos/Todos';
 const App = () => {
-  return <TodoList />;
+  return <Todos />;
 };
 
 export default App;

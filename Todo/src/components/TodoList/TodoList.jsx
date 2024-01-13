@@ -1,22 +1,13 @@
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import TodoItem from '../TodoItem/TodoItem';
-import './todoList.scss';
-export const TodoContext = createContext();
-import Button from '../Button/Button';
-import TextInput from '../TextInput/TextInput';
+import { TodoContext } from '../../context/todoContext';
 
-const TodoList = () => {
+const TodoList = ({ createdTodo, service }) => {
   const [todos, setTodos] = useState([]);
-  const [newTodoTitle, setNewTodoTitle] = useState('');
-
   useEffect(() => {
     (async () => {
       try {
-        const request = await fetch(
-            `https://jsonplaceholder.typicode.com/todos`
-          ),
-          response = await request.json();
-
+        const response = await service.get();
         setTodos(response.slice(0, 10));
       } catch (err) {
         console.log(err);
@@ -24,84 +15,92 @@ const TodoList = () => {
     })();
   }, []);
 
-  const handleCompleteClick = (item) => {
-    let tempList = [...todos];
-    const index = tempList.indexOf(item);
-    item.completed ? (item.completed = false) : (item.completed = true);
-    tempList[index] = item;
-    setTodos(tempList);
+  useEffect(() => {
+    if (Object.keys(createdTodo).length) {
+      setTodos((prevState) => [...prevState, createdTodo]);
+    }
+  }, [createdTodo]);
+
+  const handleCompleteClick = async (item) => {
+    let response = service.patch
+      ? await service.patch(item.id, {
+          ...item,
+          completed: !item.completed,
+        })
+      : await service.put(item.id, {
+          status: !item.status,
+        });
+    setTodos((prevState) =>
+      prevState.map((el) => {
+        if (el.id === response.id) el = response;
+        return el;
+      })
+    );
   };
 
-  const handleDeleteButton = (item) => {
-    let tempList = [...todos];
-    const index = tempList.indexOf(item);
-    tempList.splice(index, 1);
-    setTodos(tempList);
+  const handleDeleteButton = async (id) => {
+    try {
+      await service.delete(id);
+      setTodos((prevState) => prevState.filter((item) => item.id !== id));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleEditButton = (item) => {
-    item.isEditing = true;
-    let tempList = [...todos];
-    const index = tempList.indexOf(item);
-    tempList[index] = item;
-    setTodos(tempList);
+  const handleEditButton = async (item) => {
+    let response = service.patch
+      ? await service.patch(item.id, {
+          ...item,
+          isEditing: true,
+        })
+      : await service.put(item.id, {
+          isEditing: true,
+        });
+    setTodos((prevState) =>
+      prevState.map((el) => {
+        if (el.id === response.id) el = response;
+        return el;
+      })
+    );
   };
-  const handleSaveButton = (item, newTitle) => {
-    item.title = newTitle;
-    let tempList = [...todos];
-    const index = tempList.indexOf(item);
-    tempList[index] = item;
-    setTodos(tempList);
-    item.isEditing = false;
-  };
-
-  const handleCancelButton = (item) => {
-    item.isEditing = false;
-    let tempList = [...todos];
-    const index = tempList.indexOf(item);
-    tempList[index] = item;
-    setTodos(tempList);
-  };
-
-  const handleChange = (event) => {
-    setNewTodoTitle(event.target.value);
-  };
-
-  const handleAddTodo = () => {
-    let newTodo = {
-      userId: 1,
-      id: todos.length ? todos[todos.length - 1].id + 1 : 1,
-      title: newTodoTitle,
-      completed: false,
-    };
-    setTodos([...todos, newTodo]);
-    setNewTodoTitle('');
+  const handleSaveButton = async (item, newTitle) => {
+    let response = service.patch
+      ? await service.patch(item.id, {
+          ...item,
+          isEditing: false,
+          title: newTitle,
+        })
+      : await service.put(item.id, {
+          isEditing: false,
+          title: newTitle,
+        });
+    setTodos((prevState) =>
+      prevState.map((el) => {
+        if (el.id === response.id) el = response;
+        return el;
+      })
+    );
   };
 
-  const handleClearButton = () => {
-    setNewTodoTitle('');
+  const handleCancelButton = async (item) => {
+    let response = service.patch
+      ? await service.patch(item.id, {
+          ...item,
+          isEditing: false,
+        })
+      : await service.put(item.id, {
+          isEditing: false,
+        });
+    setTodos((prevState) =>
+      prevState.map((el) => {
+        if (el.id === response.id) el = response;
+        return el;
+      })
+    );
   };
 
   return (
-    <div className='container'>
-      <div className='add_todo_block'>
-        <TextInput
-          maxLength={60}
-          value={newTodoTitle}
-          onChange={handleChange}
-          placeholder='Enter todo title'
-        />
-        <Button
-          className='green'
-          onClickFunc={() => handleAddTodo()}
-          value={'Add todo'}
-        />
-        <Button
-          className={'red'}
-          onClickFunc={() => handleClearButton()}
-          value={'Clear'}
-        />
-      </div>
+    <>
       {todos.length ? (
         <ul className='todo--list'>
           <TodoContext.Provider
@@ -119,7 +118,7 @@ const TodoList = () => {
           </TodoContext.Provider>
         </ul>
       ) : null}
-    </div>
+    </>
   );
 };
 
