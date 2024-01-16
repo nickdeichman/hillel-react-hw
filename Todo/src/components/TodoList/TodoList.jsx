@@ -37,7 +37,7 @@ const TodoList = memo(function TodoList({ createdTodo, service, todosFilter, tod
           </TodoContext.Provider>
         </List>
       ) : isLoading ? 
-      <Stack spacing={5}>
+      <Stack spacing={3}>
         <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
         <Skeleton variant="text" sx={{ fontSize: '2rem' }} />
         <Skeleton variant="text" sx={{ fontSize: '2rem' }} />

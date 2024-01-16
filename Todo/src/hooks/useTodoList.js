@@ -15,7 +15,7 @@ export default function useTodoList(createdTodo, service, todosFilter) {
         setLoading(true);
         const response = await service.get();
         setTodos(response.slice(0, 10));
-        setTimeout(() => setLoading(false), 22000);
+        setLoading(false);
       } catch (err) {
         console.log(err);
       }
