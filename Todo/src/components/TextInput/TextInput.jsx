@@ -1,8 +1,9 @@
 import './textInput.scss'
+import TextField from '@mui/material/TextField';
 
-const TextInput = ({onChange, value, placeholder, maxLength}) => {
+const TextInput = ({sx, onChange, placeholder, maxLength, value, className}) => {
   return (
-    <input value={value} maxLength={maxLength} onChange={onChange} placeholder={placeholder} type="text" />
+    <TextField className={className} sx={sx} maxLength={maxLength} onChange={onChange} value={value} label={placeholder} variant="standard" />
   )
 }
 

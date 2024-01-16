@@ -1,8 +1,7 @@
-input[type=text] {
+@mixin input {
   padding: 0 0.5rem;
   font-size: inherit;
-  border-radius: 1rem;
   outline: 0;
   border: 0;
-  background-color: #ffffff99;
+  color: #000;
 }

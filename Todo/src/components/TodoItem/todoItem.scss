@@ -1,11 +1,22 @@
 .completed {
-  text-decoration: line-through;
+  text-decoration: line-through !important;
+  color: green;
+  font-weight: bold;
 }
 .list__item {
-   display: flex;
-   gap: 0.5rem;
-   
-   li {
-    word-break: break-all; 
-   }
+  display: flex;
+  gap: 0.5rem;
+
+  li {
+    word-break: break-all;
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .list__item {
+    font-size: 1.2rem;
+    word-break: keep-all;
+  }
+  
 }

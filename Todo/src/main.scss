@@ -3,3 +3,36 @@
   padding: 0;
   background: #0e0f2b;
 }
+@mixin list-item__btn {
+  cursor: pointer;
+  align-self: center;
+  transition: transform 0.5s ease, color 1s ease;
+  &:active {
+    transform: translateY(2px);
+  }
+}
+
+.edit-btn {
+  @include list-item__btn;
+  color: #a2ba27;
+  background: #00000088;
+  border-radius: 5px;
+  &:hover {
+    color: #b4d121;
+  }
+}
+
+.green-btn {
+  @include list-item__btn;
+  color: #167921;
+  &:hover {
+    color: #199727;
+  }
+}
+.red-btn {
+  @include list-item__btn;
+  color: #801717;
+  &:hover {
+    color: #a41515;
+  }
+}

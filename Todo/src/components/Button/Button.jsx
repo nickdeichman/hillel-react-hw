@@ -1,9 +1,10 @@
 import './button.scss';
-const Button = ({ value, onClick, className }) => {
+import ButtonMui from '@mui/material/Button';
+const Button = ({ value, onClick, className, type, color }) => {
   return (
-    <button className={className} onClick={onClick}>
+    <ButtonMui color={color} variant="contained" type={type} className={className} onClick={onClick}>
       {value}
-    </button>
+    </ButtonMui>
   );
 };
 
