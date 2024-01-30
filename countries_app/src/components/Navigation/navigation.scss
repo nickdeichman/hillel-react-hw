@@ -1,0 +1,21 @@
+.navigation {
+  ul {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    a {
+      display: inline-block;
+      color: #333;
+      border-radius: 1rem;
+      text-decoration: none;
+      transition: color 0.3s linear, background 0.3s linear,
+        text-decoration 0.3s linear;
+      &:hover {
+        color: #eee;
+        background: #78b22d;
+        text-decoration: underline;
+      }
+    }
+  }
+}

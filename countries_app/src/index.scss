@@ -1,0 +1,14 @@
+.block {
+  background-color: #ccc;
+  border-radius: 1rem;
+}
+
+.container {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: start;
+  .home-heading {
+    font-size: 1.7rem;
+    padding: 1rem;
+  }
+}
