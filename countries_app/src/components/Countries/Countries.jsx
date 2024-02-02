@@ -9,7 +9,7 @@ const Countries = () => {
 
   return (
     <List className='block country-list'>
-      {countries.length ? countries.map((country) => <CountriesListItem key={country.id} countryName={country.name.official}/> ) : null}
+      {countries.length ? countries.map((country) => <CountriesListItem key={country.id} country={country}/> ) : null}
     </List>
   )
 }

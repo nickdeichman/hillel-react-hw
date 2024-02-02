@@ -1,3 +1,3 @@
 const NAV_ITEMS = [`Home`, `Countries`];
-
-export {NAV_ITEMS}
+const COUNTRY_PATH = `/countries/`
+export {NAV_ITEMS, COUNTRY_PATH}
