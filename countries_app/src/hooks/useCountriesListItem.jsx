@@ -7,6 +7,7 @@ const useCountriesListItem = ({ country }) => {
   const { countries } = useSelector((state) => state.countries);
   const dispatch = useDispatch();
 
+
   const handleCountryClick = () => {
     countries
       .filter((item) => item.name['official'] === country.name['official'])

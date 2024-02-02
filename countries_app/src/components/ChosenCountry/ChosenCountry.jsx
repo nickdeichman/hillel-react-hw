@@ -5,8 +5,12 @@ import Button from '../Button/Button';
 import { Link } from 'react-router-dom';
 
 const ChosenCountry = () => {
-  const { selectedCountry, isTranslationInParams, translatedCountryName, handleDeleteCountryClick } =
-    useChosenCountry();
+  const {
+    selectedCountry,
+    isTranslationInParams,
+    translatedCountryName,
+    handleDeleteCountryClick,
+  } = useChosenCountry();
   return (
     <>
       <section className='block chosen-country'>
@@ -18,10 +22,18 @@ const ChosenCountry = () => {
             : null}
         </h2>
         <ChosenCountryList data={selectedCountry} />
-        <Button className={'chosen-country__delete-btn'} title='Delete country' />
+        <Link onClick={handleDeleteCountryClick} className='chosen-country-delete__link' to={'/countries'}>
+          <Button
+            className={'chosen-country__delete-btn'}
+            title='Delete country'
+          />
+        </Link>
       </section>
-      <Link  className='chosen-country-back__link' to={'/countries'}>
-        <Button onClick={handleDeleteCountryClick} className={'chosen-country__back-btn'} title={'Back to Countries'}/>
+      <Link className='chosen-country-back__link' to={'/countries'}>
+        <Button
+          className={'chosen-country__back-btn'}
+          title={'Back to Countries'}
+        />
       </Link>
     </>
   );

@@ -10,7 +10,7 @@ import useCountriesListItem from '../../../hooks/useCountriesListItem';
 
 const CountriesListItem = ({ country }) => {
   const { handleCountryClick, handleDeleteCountryClick } =
-    useCountriesListItem(country);
+    useCountriesListItem({country});
   return (
     <>
       <ListItem className='country-list__item'>
