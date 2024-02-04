@@ -5,15 +5,23 @@ import Navigation from '../Navigation/Navigation';
 import { useDispatch } from 'react-redux';
 import thunks from '../../store/countries/thunks';
 import { Container } from '@mui/material';
+import {
+  selectDefaultCapital,
+  selectDefaultTranslation,
+} from '../../store/countries/slice';
 
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(thunks.setCountries());
+    (async () => {
+      await dispatch(thunks.setCountries());
+      dispatch(selectDefaultCapital());
+      dispatch(selectDefaultTranslation());
+    })();
   }, []);
 
   return (
-    <Container className='container' maxWidth='sm' >
+    <Container className='container' maxWidth='sm'>
       <Navigation />
       <Home />
       <Outlet></Outlet>

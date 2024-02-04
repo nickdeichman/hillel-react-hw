@@ -3,19 +3,20 @@ import React from 'react';
 import Button from '../../Button/Button';
 import { Link } from 'react-router-dom';
 import { COUNTRY_PATH } from '../../../constants/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCountry } from '../../../store/countries/slice';
-import thunks from '../../../store/countries/thunks';
 import useCountriesListItem from '../../../hooks/useCountriesListItem';
 
 const CountriesListItem = ({ country }) => {
-  const { handleCountryClick, handleDeleteCountryClick } =
-    useCountriesListItem({country});
+  const { selectCountryItem, deleteCountry } = useCountriesListItem({
+    country,
+  });
+  const handleDeleteClick = () => deleteCountry(country.id);
+  const handleSelectCountryClick = () => selectCountryItem();
+
   return (
     <>
       <ListItem className='country-list__item'>
         <Link
-          onClick={handleCountryClick}
+          onClick={handleSelectCountryClick}
           to={`${COUNTRY_PATH}${country.name['official']}`}
         >
           <ListItemText
@@ -24,7 +25,7 @@ const CountriesListItem = ({ country }) => {
           />
         </Link>
         <Button
-          onClick={handleDeleteCountryClick}
+          onClick={handleDeleteClick}
           variant='contained'
           className='country-list__item-btn'
           title={'Delete'}

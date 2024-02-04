@@ -11,27 +11,30 @@ import { COUNTRY_PATH } from './../../constants/constants';
 const CapitalForm = () => {
   const {
     countries,
-    handleCapitalChange,
-    handleTranslationChange,
+    changeCountry,
+    changeTranslation,
     selectedTranslation,
     selectedCountry,
   } = useCapitalForm();
+
+  const handleCountryChange = (value) => changeCountry(value);
+  const handleTranslationChange = (value) => changeTranslation(value);
   return (
     <section className='block capital-form'>
       <h3 className='capital-form__heading'>Capital Form</h3>
       <FormControl fullWidth>
         <InputLabel id={'select_capital'}>Country</InputLabel>
         <Select
-          onChange={(e) => handleCapitalChange(e.target.value)}
+          onChange={(e) => handleCountryChange(e.target.value)}
           labelId='select_capital'
-          value={selectedCountry}
+          value={selectedCountry.capital ? selectedCountry.capital[0] : ''}
           label='Country'
         >
           {countries.length
             ? countries.map((country) => (
                 <MenuItem
                   key={country.id}
-                  value={country}
+                  value={country.capital[0]}
                 >{`${country.flag}  ${country.capital[0]}`}</MenuItem>
               ))
             : null}
@@ -61,7 +64,9 @@ const CapitalForm = () => {
         </Select>
         <Link
           to={`${COUNTRY_PATH}${
-            selectedCountry ? `${selectedCountry.name.official}?translation=${selectedTranslation}` : '/'
+            selectedCountry
+              ? `${selectedCountry.name.official}?translation=${selectedTranslation}`
+              : '/'
           }`}
         >
           <Button

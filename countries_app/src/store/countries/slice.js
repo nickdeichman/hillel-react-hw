@@ -16,14 +16,18 @@ const countrySlice = createSlice({
     selectTranslation: (state, { payload }) => {
       state.selectedTranslation = payload;
     },
+    selectDefaultCapital: (state) => {
+      state.selectedCountry = state.countries[0] ? state.countries[0] : '';
+    },
+    selectDefaultTranslation: (state) => {
+      state.selectedTranslation = Object.keys(state.countries[0].translations)
+        ? Object.keys(state.countries[0].translations)[0]
+        : '';
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(thunks.setCountries.fulfilled, (state, { payload }) => {
       state.countries = payload;
-      state.selectedCountry = payload[0];
-      state.selectedTranslation = Object.keys(payload[0].translations)
-        ? Object.keys(payload[0].translations)[0]
-        : '';
     });
     builder.addCase(thunks.deleteCountry.fulfilled, (state, { payload }) => {
       state.countries = state.countries.filter(
@@ -37,6 +41,6 @@ const countrySlice = createSlice({
   },
 });
 
-export const { selectCountry, selectTranslation } = countrySlice.actions;
+export const { selectCountry, selectTranslation, selectDefaultCapital, selectDefaultTranslation } = countrySlice.actions;
 
 export default countrySlice.reducer;

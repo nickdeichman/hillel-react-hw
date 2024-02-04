@@ -8,19 +8,20 @@ const useCapitalForm = () => {
   const dispatch = useDispatch();
   const { countries } = useSelector((state) => state.countries);
 
-  const handleCapitalChange = (capital) => {
-    dispatch(selectCountry(capital));
-    changeTranslationByCountry(capital);
+  const changeCountry = (capital) => {
+    const temp = countries.filter((country) => country.capital[0] === capital);
+    dispatch(selectCountry(...temp));
+    changeTranslationByCountry(...temp);
   };
-  const handleTranslationChange = (translation) => {
+  const changeTranslation = (translation) => {
     dispatch(selectTranslation(translation));
   };
 
-  const changeTranslationByCountry = (capital) => {
+  const changeTranslationByCountry = (country) => {
     dispatch(
       selectTranslation(
-        Object.keys(capital.translations)
-          ? Object.keys(capital.translations)[0]
+        Object.keys(country.translations)
+          ? Object.keys(country.translations)[0]
           : ''
       )
     );
@@ -28,8 +29,8 @@ const useCapitalForm = () => {
 
   return {
     countries,
-    handleCapitalChange,
-    handleTranslationChange,
+    changeCountry,
+    changeTranslation,
     selectedCountry,
     selectedTranslation,
   };

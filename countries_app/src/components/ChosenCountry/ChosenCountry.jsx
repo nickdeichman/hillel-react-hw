@@ -9,8 +9,11 @@ const ChosenCountry = () => {
     selectedCountry,
     isTranslationInParams,
     translatedCountryName,
-    handleDeleteCountryClick,
+    deleteChosenCountry,
   } = useChosenCountry();
+
+  const handleDeleteCountry = () => deleteChosenCountry();
+
   return (
     <>
       <section className='block chosen-country'>
@@ -22,7 +25,11 @@ const ChosenCountry = () => {
             : null}
         </h2>
         <ChosenCountryList data={selectedCountry} />
-        <Link onClick={handleDeleteCountryClick} className='chosen-country-delete__link' to={'/countries'}>
+        <Link
+          onClick={handleDeleteCountry}
+          className='chosen-country-delete__link'
+          to={'/countries'}
+        >
           <Button
             className={'chosen-country__delete-btn'}
             title='Delete country'

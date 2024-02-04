@@ -38,11 +38,11 @@ const useChosenCountry = () => {
     }
   }, [selectedCountry]);
 
-  const handleDeleteCountryClick = () => {
+  const deleteChosenCountry = () => {
     selectedCountry ? dispatch(thunks.deleteCountry(selectedCountry.id)) : null;
   };
 
-  return { selectedCountry, isTranslationInParams, translatedCountryName, handleDeleteCountryClick };
+  return { selectedCountry, isTranslationInParams, translatedCountryName, deleteChosenCountry };
 };
 
 export default useChosenCountry;
